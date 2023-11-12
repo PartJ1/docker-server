@@ -1,0 +1,180 @@
+jackett:
+  container_name: jackett
+  image: linuxserver/jackett
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/jackett:/config'
+    - '/home/${USER}/server/torrents:/downloads'
+  ports:
+    - '9117:9117'
+  restart: unless-stopped
+
+sonarr:
+  container_name: sonarr
+  image: linuxserver/sonarr
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/sonarr:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '8989:8989'
+  restart: unless-stopped
+
+radarr:
+  container_name: radarr
+  image: linuxserver/radarr
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/radarr:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '7878:7878'
+  restart: unless-stopped
+    
+lidarr:
+  container_name: lidarr
+  image: ghcr.io/linuxserver/lidarr
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/lidarr:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '8686:8686'
+  restart: unless-stopped
+    
+readarr:
+  container_name: readarr
+  image: 'hotio/readarr:nightly'
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/readarr:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '8787:8787'
+  restart: unless-stopped
+    
+readarr-audio-books:
+  container_name: readarr-audio-books
+  image: 'hotio/readarr:nightly'
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/readarr-audio-books:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '8786:8787'
+  restart: unless-stopped
+    
+bazarr:
+  container_name: bazarr
+  image: ghcr.io/linuxserver/bazarr
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/bazarr:/config'
+    - '/home/${USER}/server:/data'
+  ports:
+    - '6767:6767'
+  restart: unless-stopped
+
+jellyfin:
+  container_name: jellyfin
+  image: ghcr.io/linuxserver/jellyfin
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/jellyfin:/config'
+    - '/home/${USER}/server:/data/media'
+  ports:
+    - '8096:8096'
+  restart: unless-stopped
+
+plex:
+  container_name: plex
+  image: ghcr.io/linuxserver/plex
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+    - VERSION=docker
+  volumes:
+    - '/home/${USER}/server/configs/plex:/config'
+    - '/home/${USER}/server:/data/media'
+  ports:
+    - '32400:32400'
+  restart: unless-stopped
+
+ombi:
+  container_name: ombi
+  image: ghcr.io/linuxserver/ombi
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/ombi:/config'
+  ports:
+    - '3579:3579'
+  restart: unless-stopped
+
+overseerr:
+  container_name: overseerr
+  image: ghcr.io/linuxserver/overseerr
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - '/home/${USER}/server/configs/overseerr:/config'
+  ports:
+    - '5055:5055'
+  restart: unless-stopped
+
+qflood:
+  container_name: qflood
+  image: hotio/qflood
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - UMASK=002
+    - TZ=Europe/London
+    - FLOOD_AUTH=false
+  volumes:
+    - '/home/${USER}/server/configs/qflood:/config'
+    - '/home/${USER}/server/torrents:/data/torrents'
+  ports:
+    - "8080:8080"
+    - "3005:3000"
+  restart: unless-stopped
+
+flaresolverr:
+  container_name: flaresolverr
+  image: 'ghcr.io/flaresolverr/flaresolverr:latest'
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  ports:
+    - '8191:8191'
+  restart: unless-stopped
